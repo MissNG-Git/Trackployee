@@ -1,0 +1,24 @@
+{
+  "name": "trackployee",
+  "version": "1.0.0",
+  "description": "Application which provides solution for managing a company's employees using node, inquirer, and MySQL.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MissNG-Git/trackployee.git"
+  },
+  "author": "MissNG",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MissNG-Git/trackployee/issues"
+  },
+  "homepage": "https://github.com/MissNG-Git/trackployee#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^7.3.3",
+    "mysql": "^2.18.1"
+  }
+}
