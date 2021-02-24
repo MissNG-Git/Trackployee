@@ -81,10 +81,3 @@ node app.js
 ```
 
 * Answer the prompts displayed in terminal and application will execute desired action accordingly (add, view, update, delete or exit application)
-
-===========================================
-!!SUBMIT Github Repo URL & Video demo of app functionality
-
-* Check out [SQL Bolt](https://sqlbolt.com/) for some extra MySQL help.
-
-* You may wish to have a separate file containing functions for performing specific SQL queries you'll need to use. Could a constructor function or a class be helpful for organizing these?
