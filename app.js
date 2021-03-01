@@ -32,7 +32,7 @@ const startApp = () => {
         'Add Departments',
         'Add Roles',
         'Add Employees',
-        'View Deparments',
+        'View Departments',
         'View Roles',
         'View Employees',
         // 'View Employees by Manager',
@@ -113,7 +113,7 @@ const addDepts = () => {
   inquirer.prompt([
     {
       type: 'input',
-      message: 'Which Department would you like to add?',
+      message: 'What is the [NAME] of the Department you would like to add?',
       name: 'dept'
     }
   ]).then(function(res) {
@@ -139,7 +139,13 @@ const addEmployees = () => {
 
 // Fxns to viewDepts, viewRoles, viewEmployees
 const viewDepts = () => {
-  // console.log('viewDepts!')
+  connection.query(
+    `SELECT * FROM department`,
+     (err, res) => {
+      if (err) throw err;
+      console.table(res);
+      startApp();
+    });
 }
 
 const viewRoles = () => {
