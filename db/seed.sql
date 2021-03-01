@@ -34,7 +34,7 @@ VALUE
     ("Bob", "Beau", 4, null), -- Off Mgr
     ("Jane", "Doe", 8, 2),
     ("Jim", "Bob", 5, 1),
-    ("Joe", "Schmoe", 2, null), --CEO
+    ("Joe", "Schmoe", 2, null), -- CEO
     ("John", "Smith", 1, 1),
     ("Mary", "Jane", 3, 1),
     ("Tom", "Mott", 6, 1),
