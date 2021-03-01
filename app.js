@@ -110,7 +110,23 @@ const startApp = () => {
 
 // Fxns to addDepts, addRoles, addEmployees
 const addDepts = () => {
-  // console.log('addDepts!')
+  inquirer.prompt([
+    {
+      type: 'input',
+      message: 'Which Department would you like to add?',
+      name: 'dept'
+    }
+  ]).then(function(res) {
+    connection.query(
+      `INSERT INTO department (name) VALUES ('${res.dept}')`,
+       (err, res) => {
+        if (err) throw err;
+        console.table(res);
+        console.log(`${res.affectedRows} department added!\n`)
+        startApp();
+      });
+    // console.log('-------------------------------------------------------------------------------------')
+  })
 }
 
 const addRoles = () => {
