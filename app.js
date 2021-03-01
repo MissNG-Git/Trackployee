@@ -146,14 +146,29 @@ const viewDepts = () => {
       console.table(res);
       startApp();
     });
+  console.log('Viewing Departments!')
 }
 
 const viewRoles = () => {
-  // console.log('viewRoles!')
+  connection.query(
+    `SELECT * FROM role`,
+     (err, res) => {
+      if (err) throw err;
+      console.table(res);
+      startApp();
+    });
+  console.log('Viewing Roles!')
 }
 
 const viewEmployees = () => {
-  // console.log('viewEmployees!')
+  connection.query(
+    `SELECT * FROM employee`,
+     (err, res) => {
+      if (err) throw err;
+      console.table(res);
+      startApp();
+    });
+  console.log('Viewing Employees!')
 }
 
 // Fxn to updateRoles
