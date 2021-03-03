@@ -5,18 +5,19 @@ const consoleTable = require('console.table');
 
 // Connection
 const connection = mysql.createConnection({
-    host: 'localhost',
-    port: 3306,
-    user: 'root',
-    // hide pw w/'npm i maskdata OR hide-secrets'
-    password: 'yourRootPassword',
-    database: 'trackployee_db',
-  });
+  host: 'localhost',
+  port: 3306,
+  user: 'root',
+  // hide pw w/'npm i maskdata OR hide-secrets'
+  password: 'yourRootPassword',
+  database: 'trackployee_db',
+});
 
-  connection.connect(function(err) {
-    if (err) throw err
-    console.log(`Connected as ID ${connection.threadId}`);
-    startApp();
+connection.connect((err) => {
+  if (err) throw err;
+  // OR if (err) {console.error(`error connecting: ${err.stack}`); return;}
+  console.log(`Connected as ID ${connection.threadId}`);
+  startApp();
 });
 
 // Inquirer: PROMPT questions, THEN view/add data 
@@ -45,7 +46,7 @@ const startApp = () => {
         'Exit Trackployee'
       ]
     }
-  ]).then(function(res){
+  ]).then((res) => {
     switch (res.options) {
       case 'Add Departments': 
         addDepts();
@@ -107,7 +108,6 @@ const startApp = () => {
 }
 
 // ** Remember: Create, Read, Update, Delete! **
-
 // Fxns to addDepts, addRoles, addEmployees
 const addDepts = () => {
   inquirer.prompt([
@@ -116,7 +116,7 @@ const addDepts = () => {
       message: 'What is the [NAME] of the Department you would like to add?',
       name: 'dept'
     }
-  ]).then(function(res) {
+  ]).then((res) => {
     connection.query(
       `INSERT INTO department (name) VALUES ('${res.dept}')`,
        (err, res) => {
@@ -124,15 +124,65 @@ const addDepts = () => {
         console.table(res);
         console.log(`${res.affectedRows} department added!\n`)
         startApp();
-      });
+      })
     // console.log('-------------------------------------------------------------------------------------')
   })
 }
 
 const addRoles = () => {
-  // console.log('addRoles!')
-}
+  connection.query(
+    'SELECT * FROM department', 
+    (err, res) => {
+      if (err) throw err;
 
+      inquirer.prompt([
+        {
+          type: 'input',
+          message: 'What is the job [TITLE] of the Role would you like to add?',
+          name: 'title'
+        },
+
+        {
+          type: 'number',
+          message: 'What is the [SALARY] for this role?',
+          name: 'salary'
+        },
+
+        {
+          type: 'list',
+          message: 'What [DEPARTMENT] is this role in?',
+          name: 'deptList',
+          choices: () => {
+            let deptArray = [];
+            for (let i = 0; i < res.length; i++) {
+            deptArray.push(res[i].name);
+            }
+            return deptArray;
+          }
+        }
+      ]).then((ans) => {
+        let deptID;
+        for (let a = 0; a < res.length; a++) {
+          if (res[a].name === ans.deptList) {
+            deptID = res[a].id;
+          }
+        }
+
+        connection.query(
+          `INSERT INTO role (title, salary, department_id) VALUES ('${ans.title}', '${ans.salary}', '${deptID}')`,
+          (err, res) => {
+            if (err) throw err;
+            console.table(res);
+            console.log(`${res.affectedRows} role added!\n`)
+            startApp();
+          }
+        )
+        // console.log('-------------------------------------------------------------------------------------')
+      });
+    }
+  )
+}
+  
 const addEmployees = () => {
   // console.log('addEmployees!')
 }
@@ -141,34 +191,37 @@ const addEmployees = () => {
 const viewDepts = () => {
   connection.query(
     `SELECT * FROM department`,
-     (err, res) => {
+    (err, res) => {
       if (err) throw err;
       console.table(res);
       startApp();
-    });
-  console.log('Viewing Departments!')
+    }
+  )
+  console.log('Viewing Departments!');
 }
 
 const viewRoles = () => {
   connection.query(
     `SELECT * FROM role`,
-     (err, res) => {
+    (err, res) => {
       if (err) throw err;
       console.table(res);
       startApp();
-    });
-  console.log('Viewing Roles!')
+    }
+  )
+  console.log('Viewing Roles!');
 }
 
 const viewEmployees = () => {
   connection.query(
     `SELECT * FROM employee`,
-     (err, res) => {
+    (err, res) => {
       if (err) throw err;
       console.table(res);
       startApp();
-    });
-  console.log('Viewing Employees!')
+    }
+  )
+  console.log('Viewing Employees!');
 }
 
 // Fxn to updateRoles
