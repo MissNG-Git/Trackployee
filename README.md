@@ -31,7 +31,7 @@ EXAMPLE:
     <img src="/Assets/employee-tracker.gif" alt="Employee Tracker" width="200"/>
 </p>
 
-DEMO:
+DEMO: <br><br>
 ![Trackployee Demo](./Assets/demoTrackployee.gif)
 
 ### ≫ ──── ≪•◦ Overview of Code Functionality ◦•≫ ──── ≪
