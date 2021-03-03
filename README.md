@@ -32,7 +32,7 @@ EXAMPLE:
 </p>
 
 DEMO:
-![Trackployee Demo](./assets/demoTrackployee.gif)
+![Trackployee Demo](./Assets/demoTrackployee.gif)
 
 ### ≫ ──── ≪•◦ Overview of Code Functionality ◦•≫ ──── ≪
 
