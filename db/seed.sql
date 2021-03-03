@@ -32,11 +32,11 @@ INSERT INTO employee
     (first_name, last_name, role_id, manager_id)
 VALUE 
     ("Bob", "Beau", 4, null), -- Off Mgr
-    ("Jane", "Doe", 8, 2),
-    ("Jim", "Bob", 5, 1),
+    ("Jane", "Doe", 8, 7),
+    ("Jim", "Bob", 5, 4),
     ("Joe", "Schmoe", 2, null), -- CEO
-    ("John", "Smith", 1, 1),
-    ("Mary", "Jane", 3, 1),
+    ("John", "Smith", 1, 4),
+    ("Mary", "Jane", 3, 4),
     ("Tom", "Mott", 6, 1),
     ("Yu", "Mi", 7, null); -- Sales Mgr
 

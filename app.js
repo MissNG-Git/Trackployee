@@ -131,7 +131,7 @@ const addDepts = () => {
 
 const addRoles = () => {
   connection.query(
-    'SELECT * FROM department', 
+    `SELECT * FROM department`, 
     (err, res) => {
       if (err) throw err;
 
@@ -184,7 +184,71 @@ const addRoles = () => {
 }
   
 const addEmployees = () => {
-  // console.log('addEmployees!')
+  connection.query(
+    `SELECT * FROM role`,
+    (err, res) => {
+      if (err) throw err;
+
+      inquirer.prompt([
+        {
+          type: 'input',
+          message: "What is the employee's [FIRST_NAME]?",
+          name: 'firstName'
+        },
+
+        {
+          type: 'input',
+          message: "What is the employee's [LAST_NAME]?",
+          name: 'lastName'
+        },
+
+        {
+          type: 'list',
+          message: "What is the employee's [ROLE]?",
+          name: 'roleList',
+          choices: () => {
+            let roleArray = [];
+            for (let i = 0; i < res.length; i++) {
+              roleArray.push(res[i].title);
+            }
+            return roleArray;
+          }
+        },
+
+        {
+          type: 'input',
+          message: "What is the [MANAGER_ID] of this employee's manager, if applicable?",
+          name: 'mgrID'
+        }
+      ]).then((ans) => {
+        let roleID;
+        for (let a = 0; a < res.length; a++) {
+          if (res[a].title === ans.roleList) {
+            roleID = res[a].id;
+          }
+        }
+        
+        // let managerID;
+        // for (let b = 0; b < res.length; b++) {
+        //   if (res[b].id === ans.mgrID) {
+        //     managerID = res[b].id;
+        //   }
+        // }
+
+        // fix CONSTRAINT FK REFS issue!
+        connection.query(
+          `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ('${ans.firstName}', '${ans.lastName}', '${roleID}', '${ans.mgrID}')`,
+          (err, res) => {
+            if (err) throw err;
+            console.table(res);
+            console.log(`${res.affectedRows} employee added!\n`)
+            startApp();
+          }
+        )
+        // console.log('-------------------------------------------------------------------------------------')
+      });
+    }
+  )
 }
 
 // Fxns to viewDepts, viewRoles, viewEmployees
