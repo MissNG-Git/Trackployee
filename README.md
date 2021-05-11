@@ -1,4 +1,4 @@
-# Unit 12 MySQL Homework: Employee Tracker
+# Unit 12 MySQL: Employee Tracker
 
 ⋘ ──── ∗⋅◦∘◈\[[MissNG Trackployee](#mock-up)\]◈∘◦⋅∗ ──── ⋙
 
